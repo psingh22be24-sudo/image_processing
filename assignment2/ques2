@@ -1,0 +1,44 @@
+import cv2
+import numpy as np
+
+
+image = cv2.imread("image.jpg")
+
+
+B, G, R = cv2.split(image)
+
+
+R = R.astype(float)
+G = G.astype(float)
+B = B.astype(float)
+
+wr = float(input("Enter weight for R: "))
+wg = float(input("Enter weight for G: "))
+wb = float(input("Enter weight for B: "))
+
+
+if (0 <= wr <= 1 and
+    0 <= wg <= 1 and
+    0 <= wb <= 1 and
+    abs(wr + wg + wb - 1) < 0.0001):
+
+  
+    gray_weighted = (R * wr) + (G * wg) + (B * wb)
+
+ 
+    gray_weighted = gray_weighted.astype(np.uint8)
+
+    
+    cv2.imshow("Grayscale - Weighted", gray_weighted)
+
+else:
+    print("Invalid weights!")
+    print("Each weight must be between 0 and 1.")
+    print("The sum of all weights must be equal to 1.")
+
+
+
+cv2.waitKey(0)
+
+
+cv2.destroyAllWindows()
