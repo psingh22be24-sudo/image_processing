@@ -1,0 +1,19 @@
+import cv2
+import numpy as np
+
+
+img = cv2.imread("gray_image.jpg", cv2.IMREAD_GRAYSCALE)
+
+threshold = np.mean(img)
+
+print("Mean intensity (Threshold) =", threshold)
+
+
+binary = np.where(img >= threshold, 255, 0).astype(np.uint8)
+
+
+cv2.imshow("Grayscale Image", img)
+cv2.imshow("Binary Image - Mean Threshold", binary)
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()
