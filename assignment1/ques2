@@ -1,20 +1,29 @@
 import cv2
 import numpy as np
+import matplotlib.pyplot as plt
 
+# Read image as grayscale
+img = cv2.imread("dog.jpg", cv2.IMREAD_GRAYSCALE)
 
-img = cv2.imread("gray_image.jpg", cv2.IMREAD_GRAYSCALE)
-
-
+# Take threshold from user
 threshold = int(input("Enter threshold value (0-255): "))
 
-
+# Convert grayscale to binary
 binary = np.where(img >= threshold, 255, 0).astype(np.uint8)
 
 print("Threshold =", threshold)
 
+# Display images using matplotlib
+plt.figure(figsize=(10, 4))
 
-cv2.imshow("Grayscale Image", img)
-cv2.imshow("Binary Image - User Threshold", binary)
+plt.subplot(1, 2, 1)
+plt.imshow(img, cmap="gray")
+plt.title("Grayscale Image")
+plt.axis("off")
 
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+plt.subplot(1, 2, 2)
+plt.imshow(binary, cmap="gray")
+plt.title("Binary Image - User Threshold")
+plt.axis("off")
+
+plt.show()
