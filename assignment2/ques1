@@ -1,25 +1,26 @@
 import cv2
 import numpy as np
+import matplotlib.pyplot as plt
 
+# Read color image
+image = cv2.imread("dog.jpg")
 
-image = cv2.imread("image.jpg")
-
-
+# Split into B, G, R channels
 B, G, R = cv2.split(image)
 
-
+# Convert to float
 R = R.astype(float)
 G = G.astype(float)
 B = B.astype(float)
 
-
-
 # Mean average of R, G and B
-
 gray_mean = (R + G + B) / 3
 
-
+# Convert back to uint8
 gray_mean = gray_mean.astype(np.uint8)
 
-
-cv2.imshow("Grayscale - Mean Average", gray_mean)
+# Display grayscale image
+plt.imshow(gray_mean, cmap="gray")
+plt.title("Grayscale - Mean Average")
+plt.axis("off")
+plt.show()
